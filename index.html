@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Home | Luciana Rocha</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&family=La+Belle+Aurore&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "wine": "#5E1914",
+                        "cream": "#F9F4F0",
+                        "chocolate": "#333333",
+                        "gold": "#A68966",
+                        "taupe": "#EBE4D5"
+                    },
+                    fontFamily: {
+                        "sans": ["Montserrat", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "hand": ["La Belle Aurore", "cursive"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            background-color: #F9F4F0;
+            color: #333333;
+            scroll-behavior: smooth;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-block {
+            border-radius: 3rem;
+            overflow: hidden;
+        }
+
+        .card-premium {
+            background-color: rgba(235, 228, 213, 0.2);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-premium:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-0.25rem);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: #5E1914;
+        }
+
+        .handwritten {
+            font-family: 'La Belle Aurore', cursive;
+        }
+
+        .cta-btn {
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-btn:active {
+            transform: scale(0.95);
+        }
+
+        .glass-header {
+            background: rgba(249, 244, 240, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .section-padding {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9F7F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A68966;
+            border-radius: 10px;
+        }
+
+        .video-animate-entry {
+            opacity: 0;
+            transform: translate(-50%, 30px); /* Fix: Mantém centro mesmo em estado inicial */
+            transition: all 1.2s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+
+        .video-animate-entry.active {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .hero-text-shadow {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            padding-bottom: 3rem;
+            position: relative;
+        }
+
+        .carousel-container::before,
+        .carousel-container::after {
+            display: none; /* Removido para suportar loop infinito manual */
+        }
+
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-card {
+            flex: 0 0 72%;
+            margin-right: 0;
+            scroll-snap-align: center;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: scale(0.8);
+            opacity: 0.2;
+            filter: blur(8px);
+        }
+
+        @media (min-width: 1024px) {
+            .carousel-card {
+                flex: 0 0 50%;
+            }
+        }
+
+        /* Estilos Depoimentos (Novo) */
+        .depoimentos-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            gap: 2rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .depoimento-card {
+            flex: 0 0 100%;
+            background: white;
+            border-radius: 2rem;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+
+        @media (min-width: 1024px) {
+            .depoimento-card {
+                flex: 0 0 calc(50% - 1rem); /* Exibe 2 cards lado a lado no desktop */
+            }
+        }
+
+        .depoimento-text {
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #4A2C2A;
+        }
+
+        .depoimento-author {
+            margin-top: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            color: #C19A6B;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .depoimento-author::before {
+            content: '';
+            width: 2rem;
+            height: 1px;
+            background: #C19A6B;
+        }
+
+        .carousel-card.active {
+            transform: scale(1) !important;
+            opacity: 1 !important;
+            z-index: 20;
+            filter: blur(0) !important;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-wine/10">
+
+    <header class="sticky top-0 z-50 glass-header border-b border-gold/20">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gold text-2xl">eco</span>
+                <span class="text-xl font-serif font-bold italic tracking-tight text-wine">Luciana Rocha</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-[10px] uppercase tracking-widest font-bold text-chocolate hover:text-wine transition-colors"
+                    href="#tratamentos">Tratamentos</a>
+                <a class="text-[10px] uppercase tracking-widest font-bold text-chocolate hover:text-wine transition-colors"
+                    href="#trabalho">Como Funciona</a>
+                <a class="text-[10px] uppercase tracking-widest font-bold text-chocolate hover:text-wine transition-colors"
+                    href="#depoimentos">Depoimentos</a>
+                <a class="text-[10px] uppercase tracking-widest font-bold text-chocolate hover:text-wine transition-colors"
+                    href="#sobre">Sobre Mim</a>
+                <a class="text-[10px] uppercase tracking-widest font-bold text-chocolate hover:text-wine transition-colors"
+                    href="#faq">FAQ</a>
+            </nav>
+            <a class="inline-flex items-center justify-center px-6 py-2 bg-wine text-white rounded-full text-[10px] font-bold uppercase tracking-widest cta-btn"
+                href="https://wa.me/5561984276647" target="_blank">
+                Agendar Consulta
+            </a>
+        </div>
+    </header>
+
+    <main class="space-y-0">
+
+        <!-- Hero & Video Overlap Section -->
+        <section class="relative min-h-[75vh] lg:min-h-[85vh] flex items-center overflow-visible">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <div class="w-full h-full bg-cover bg-[center_20%] lg:bg-fixed"
+                    style="background-image: url('Luciana 2.png');"></div>
+                <!-- Linear Gradient Overlay -->
+                <div class="absolute inset-0 bg-wine/40"></div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-40 lg:pb-52">
+                <div class="lg:w-3/5 space-y-6">
+                    <h1 class="text-2xl md:text-5xl font-serif text-white leading-tight hero-text-shadow">
+                        Um apoio para mulheres que buscam ser as melhores mães que podem ser.
+                    </h1>
+                    <ul class="space-y-3 text-xs md:text-base text-cream hero-text-shadow">
+                        <li class="flex items-start gap-3">
+                            <span class="text-gold mt-1">•</span>
+                            <span><strong>Dê lugar ao que você sente:</strong> A maternidade não é fácil ou intuitiva, e
+                                tudo bem sentir isso.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-gold mt-1">•</span>
+                            <span><strong>Não caminhe sozinha:</strong> Um espaço seguro para dividir as dificuldades e
+                                pesos dessa grande transformação.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-gold mt-1">•</span>
+                            <span><strong>Maternidade real e possível:</strong> Descubra como viver o seu papel de mãe
+                                sem a cobrança da perfeição.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-gold mt-1">•</span>
+                            <span><strong>Resgate a sua identidade:</strong> Reencontre a mulher que existe por trás da
+                                mãe, integrando sua história.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Video Player -->
+            <div
+                class="absolute -bottom-40 lg:-bottom-80 left-1/2 w-full max-w-4xl px-6 z-30 reveal video-animate-entry">
+                <div class="aspect-video bg-taupe rounded-2xl border-[4px] border-white overflow-hidden shadow-2xl">
+                    <div class="w-full h-full flex items-center justify-center relative group">
+                        <img src="clinica.jpg"
+                            class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
+                        <span
+                            class="material-symbols-outlined text-wine text-8xl cursor-pointer hover:scale-110 transition-transform relative z-10">play_circle</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Serviços e Acolhimento -->
+        <section id="tratamentos" class="section-padding bg-white scroll-mt-20 pt-64 lg:pt-96">
+            <div class="max-w-5xl mx-auto px-6">
+                <!-- Header da Seção -->
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-3xl md:text-4xl font-serif text-wine mb-6 leading-tight">
+                        Psicologia para o maternar e orientação para pais, com foco em uma jornada real e possível.
+                    </h2>
+                    <p class="text-chocolate/80 text-lg max-w-3xl mx-auto leading-relaxed">
+                        Aqui, você encontra um espaço seguro, ético e sem julgamentos para <strong>compreender as
+                            transformações da maternidade</strong> e construir um caminhar mais consciente e leve.
+                    </p>
+                </div>
+
+                <!-- Grid de Serviços (4 Pilares) -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Pilar 1 -->
+                    <div class="bg-taupe/20 rounded-2xl p-12 text-center reveal border border-gold/10">
+                        <span class="material-symbols-outlined text-gold text-5xl mb-6">psychology</span>
+                        <h3 class="text-2xl font-serif text-wine mb-4">Psicoterapia Perinatal</h3>
+                        <p class="text-chocolate/70 leading-relaxed text-sm">
+                            Para mulheres que atravessam a gestação, o pós-parto ou o luto, oferecendo sustento para as
+                            mudanças que acontecem no corpo e na alma.
+                        </p>
+                    </div>
+
+                    <!-- Pilar 2 -->
+                    <div class="bg-taupe/20 rounded-2xl p-12 text-center reveal border border-gold/10">
+                        <span class="material-symbols-outlined text-gold text-5xl mb-6">eco</span>
+                        <h3 class="text-2xl font-serif text-wine mb-4">Apoio ao Maternar e Puérperio</h3>
+                        <p class="text-chocolate/70 leading-relaxed text-sm">
+                            Quando a maternidade se torna solitária ou exaustiva. Vamos dar lugar ao que você sente e
+                            integrar sua nova identidade de mulher e mãe.
+                        </p>
+                    </div>
+
+                    <!-- Pilar 3 -->
+                    <div class="bg-taupe/20 rounded-2xl p-12 text-center reveal border border-gold/10">
+                        <span class="material-symbols-outlined text-gold text-5xl mb-6">pregnant_woman</span>
+                        <h3 class="text-2xl font-serif text-wine mb-4">Pré-natal Psicológico</h3>
+                        <p class="text-chocolate/70 leading-relaxed text-sm">
+                            Um acompanhamento emocional preventivo para gestantes que desejam se preparar para o parto e
+                            a chegada do bebê com mais estabilidade e consciência.
+                        </p>
+                    </div>
+
+                    <!-- Pilar 4 -->
+                    <div class="bg-taupe/20 rounded-2xl p-12 text-center reveal border border-gold/10">
+                        <span class="material-symbols-outlined text-gold text-5xl mb-6">family_restroom</span>
+                        <h3 class="text-2xl font-serif text-wine mb-4">Orientação Parental</h3>
+                        <p class="text-chocolate/70 leading-relaxed text-sm">
+                            Um espaço de cuidado para mães e pais que buscam educar com mais firmeza, menos culpa e
+                            maior alinhamento com seus próprios valores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1.5 Carrossel Trabalho -->
+        <section id="trabalho" class="section-padding bg-cream/50 scroll-mt-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <!-- Header -->
+                <div class="text-center mb-16 reveal">
+                    <span class="text-chocolate/60 font-bold uppercase tracking-[0.2em] text-[10px] block mb-4">
+                        É SUA PRIMEIRA VEZ NA TERAPIA? SEM PROBLEMA!
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-wine italic">
+                        <strong class="font-extrabold not-italic">Como funciona</strong> meu trabalho na terapia
+                    </h2>
+                </div>
+
+                <!-- Carousel -->
+                <div class="carousel-container gap-6 pb-12">
+                    <!-- Card 1 -->
+                    <div
+                        class="carousel-card bg-wine rounded-3xl p-8 lg:p-12 flex flex-col items-center text-center border border-white/10 shadow-xl">
+                        <h4 class="text-xl lg:text-2xl font-serif text-taupe mb-4 lg:mb-6 leading-tight">Escuta do
+                            Maternar</h4>
+                        <p class="text-cream/80 text-xs lg:text-sm leading-relaxed">
+                            "Um espaço seguro para você dar lugar às suas ambivalências, medos e descobertas, integrando
+                            a mulher que você foi com a mãe que está se tornando."
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="carousel-card bg-wine rounded-3xl p-8 lg:p-12 flex flex-col items-center text-center border border-white/10 shadow-xl">
+                        <h4 class="text-xl lg:text-2xl font-serif text-taupe mb-4 lg:mb-6 leading-tight">Fortalecimento
+                            de Vínculo</h4>
+                        <p class="text-cream/80 text-xs lg:text-sm leading-relaxed">
+                            "Compreenda as necessidades emocionais do seu bebê e desenvolva a confiança necessária para
+                            construir uma relação baseada no afeto e na presença real."
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="carousel-card bg-wine rounded-3xl p-8 lg:p-12 flex flex-col items-center text-center border border-white/10 shadow-xl">
+                        <h4 class="text-xl lg:text-2xl font-serif text-taupe mb-4 lg:mb-6 leading-tight">Cuidado com a
+                            Saúde Mental</h4>
+                        <p class="text-cream/80 text-xs lg:text-sm leading-relaxed">
+                            "Acompanhamento especializado para lidar com a ansiedade, o baby blues ou o luto, garantindo
+                            que você não precise caminhar sozinha por essas transformações."
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div
+                        class="carousel-card bg-wine rounded-3xl p-8 lg:p-12 flex flex-col items-center text-center border border-white/10 shadow-xl">
+                        <h4 class="text-xl lg:text-2xl font-serif text-taupe mb-4 lg:mb-6 leading-tight">Orientação
+                            Parental Consciente
+                        </h4>
+                        <p class="text-cream/80 text-xs lg:text-sm leading-relaxed">
+                            "Caminhamos juntos para que você possa educar com mais clareza e menos culpa, encontrando
+                            caminhos que façam sentido para a realidade da sua família."
+                        </p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div
+                        class="carousel-card bg-wine rounded-3xl p-8 lg:p-12 flex flex-col items-center text-center border border-white/10 shadow-xl">
+                        <h4 class="text-xl lg:text-2xl font-serif text-taupe mb-4 lg:mb-6 leading-tight">Preparo para o
+                            Pós-parto</h4>
+                        <p class="text-cream/80 text-xs lg:text-sm leading-relaxed">
+                            "Um olhar atento para o seu mundo psíquico durante a gestação, preparando o terreno
+                            emocional para a chegada do seu filho e para a sua nova rotina."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dots Indicators -->
+                <div class="flex justify-center gap-2 mb-12">
+                    <div class="w-8 h-1 bg-gold/30 rounded-full"></div>
+                    <div class="w-8 h-1 bg-gold/30 rounded-full"></div>
+                    <div class="w-8 h-1 bg-gold rounded-full"></div>
+                    <div class="w-8 h-1 bg-gold/30 rounded-full"></div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="flex justify-center reveal">
+                    <a href="https://wa.me/5561984276647" target="_blank"
+                        class="inline-flex items-center gap-3 px-10 py-5 bg-wine text-white rounded-full text-sm font-bold uppercase tracking-widest cta-btn shadow-lg">
+                        <span class="material-symbols-outlined text-xl">call</span>
+                        VAMOS CONVERSAR?
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 4. Depoimentos -->
+        <section id="depoimentos" class="section-padding bg-white scroll-mt-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <span class="material-symbols-outlined text-gold text-5xl opacity-40 mb-4">format_quote</span>
+                    <h2 class="text-5xl font-serif italic text-wine mb-4">Relatos de quem caminha comigo</h2>
+
+                    <!-- Selo Depoimentos conforme imagem -->
+                    <div class="flex flex-col items-center gap-2 mb-8">
+                        <span class="text-wine font-serif text-3xl font-bold">Depoimentos</span>
+                        <div class="flex text-gold">
+                            <span class="material-symbols-outlined fill-current">star</span>
+                            <span class="material-symbols-outlined fill-current">star</span>
+                            <span class="material-symbols-outlined fill-current">star</span>
+                            <span class="material-symbols-outlined fill-current">star</span>
+                            <span class="material-symbols-outlined fill-current">star</span>
+                        </div>
+                    </div>
+
+                    <div class="h-px w-20 bg-gold/50 mx-auto"></div>
+                </div>
+
+                <!-- Carousel Depoimentos -->
+                <div class="relative max-w-6xl mx-auto">
+                    <div class="depoimentos-container">
+                        <!-- Relato 1 -->
+                        <div class="depoimento-card">
+                            <p class="depoimento-text">
+                                "Eu cheguei exausta, tentando ser a mãe perfeita que li nos livros. Mas daí eu encontrei
+                                a Luciana ❤️, eu consegui finalmente entender que ser uma 'mãe possível' é o maior gesto
+                                de amor que eu poderia ter comigo e com meu filho. Isso me livrou de tanto peso, tanta
+                                cobrança. Obrigado, Lu!"
+                            </p>
+                            <div class="depoimento-author">B. N Brasília</div>
+                        </div>
+
+                        <!-- Relato 2 -->
+                        <div class="depoimento-card">
+                            <p class="depoimento-text">
+                                "Passei anos tentando ser mãe, anos... Foi o momento, que eu e meu esposo passamos, mais
+                                solitário das nossas vida. A cada pergunta: 'E aí, o filho vem quando?', 'Já passou da
+                                hora!'. A nossa angústia só aumentava. Mas com a Lu eu encontrei não só uma profissional
+                                excelente, mas alguém que me acolheu e entendeu o que eu estava passando."
+                            </p>
+                            <div class="depoimento-author">L. M. F - Brasília</div>
+                        </div>
+
+                        <!-- Relato 3 -->
+                        <div class="depoimento-card">
+                            <p class="depoimento-text">
+                                "A orientação da Luciana me deu a segurança que eu precisava para educar os meus filhos
+                                com consciência. Aprendi a sustentar minhas decisões com firmeza, mas com muito mais
+                                leveza e amor."
+                            </p>
+                            <div class="depoimento-author">P. R - Rio de Janeiro</div>
+                        </div>
+
+                        <!-- Relato 4 -->
+                        <div class="depoimento-card">
+                            <p class="depoimento-text">
+                                "O pré-natal psicológico me fez enxergar coisas que eu nunca pensei que iria viver...
+                                Pude olhar com carinho e cuidado para os meus medos sem pressa e me preparar para o
+                                parto de forma inteira, muito mais presente."
+                            </p>
+                            <div class="depoimento-author">P. R. A. N. São Paulo</div>
+                        </div>
+
+                        <!-- Relato 5 -->
+                        <div class="depoimento-card">
+                            <p class="depoimento-text">
+                                "Sabe aquele lugar de escuta séria para falar das sombras da maternidade que ninguém
+                                comenta? Encontrei isso na terapia. Saio de cada sessão me sentindo mais enraizada e
+                                capaz de lidar com a vida real."
+                            </p>
+                            <div class="depoimento-author">T. S. C. Brasília</div>
+                        </div>
+                    </div>
+
+                    <!-- Dots Depoimentos -->
+                    <div class="depoimentos-dots flex justify-center gap-2 mt-12">
+                        <!-- Gerados via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Sobre mim -->
+        <section id="sobre" class="section-padding bg-[#F9F7F2] scroll-mt-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-24">
+                    <div class="lg:w-1/2 reveal">
+                        <div class="relative group">
+                            <div
+                                class="absolute -inset-6 border-2 border-gold/30 rounded-[4rem] group-hover:inset-0 transition-all duration-700">
+                            </div>
+                            <img src="Luciana.png" alt="Luciana Rocha"
+                                class="relative rounded-[3rem] shadow-2xl w-full h-[650px] object-cover transition-all duration-700">
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 space-y-12 reveal">
+                        <div class="space-y-4">
+                            <span class="text-gold font-bold uppercase tracking-[0.4em] text-xs">Quem caminha ao seu
+                                lado?</span>
+                            <h2 class="text-6xl font-serif text-wine leading-tight">Olá, sou <span
+                                    class="italic text-gold">Luciana Rocha</span>.</h2>
+                        </div>
+                        <div class="space-y-8 text-xl leading-relaxed text-chocolate/80 font-serif">
+                            <p>Sabe, eu não vejo a <strong>psicologia apenas como uma ciência,</strong> mas como um
+                                encontro no qual você
+                                pode se reinventar em cada fase. Acredito que, quando encontramos aceitação e
+                                direcionamento, a vida floresce, e a <strong>maternidade ganha o espaço que merece em
+                                    nossas
+                                    vidas.</strong></p>
+                            <p>Nossa jornada será feita de muita escuta e apoio ao seu maternar. Partiremos em busca de
+                                ressignificar e encontrar os sentidos que você dá a essa transformação tão profunda.
+                                Entendo que o nascimento de um filho e de uma mãe pode ser assustadoramente
+                                <strong>solitário se
+                                    não houver um espaço seguro para falar a verdade sobre os seus sentimentos.</strong>
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-gold/20">
+                            <div class="flex items-start gap-5">
+                                <span class="material-symbols-outlined text-gold text-4xl">school</span>
+                                <div>
+                                    <h4 class="font-bold text-wine mb-2 uppercase text-xs tracking-widest">Acadêmico
+                                    </h4>
+                                    <p class="text-sm text-chocolate/70 leading-relaxed">
+                                        Psicóloga perinatal, há 20&nbsp;anos.<br>
+                                        Mestre em Psicologia Clínica e Cultura.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <span class="material-symbols-outlined text-gold text-4xl">verified</span>
+                                <div>
+                                    <h4 class="font-bold text-wine mb-2 uppercase text-xs tracking-widest">Habilitação
+                                    </h4>
+                                    <p class="text-sm font-bold text-wine">CRP.: 01/11.343</p>
+                                    <p class="text-[10px] text-chocolate/50 uppercase font-bold tracking-widest">
+                                        Conselho Regional de Psicologia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 5.5 Instagram -->
+        <section id="instagram" class="section-padding bg-[#F9F7F2] -mt-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-5xl font-serif text-wine">Me encontre no <span
+                            class="italic text-gold">Instagram</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto reveal">
+                    <!-- Post 1 -->
+                    <a href="https://www.instagram.com/p/DF8sPpIvNf8/?igsh=MThycHR1N2xhZzFlYg==" target="_blank"
+                        class="relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl block">
+                        <img src="insta_post_1.jpg" alt="Instagram Post 1"
+                            class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-wine/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-5xl">favorite</span>
+                        </div>
+                    </a>
+                    <!-- Post 2 -->
+                    <a href="https://www.instagram.com/p/C8M0pzAMem3/?igsh=MWFodjkxaWw5MGFxeA==" target="_blank"
+                        class="relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl block">
+                        <img src="insta_post_2.jpg" alt="Instagram Post 2"
+                            class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-wine/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-5xl">favorite</span>
+                        </div>
+                    </a>
+                    <!-- Post 3 -->
+                    <a href="https://www.instagram.com/p/C7mR5kWscLr/?igsh=MXY3OXV4eWw0cThmNA==" target="_blank"
+                        class="relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl block">
+                        <img src="insta_post_3.jpg" alt="Instagram Post 3"
+                            class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-wine/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-5xl">favorite</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-center reveal">
+                    <a href="https://www.instagram.com/eulucianaarocha" target="_blank"
+                        class="inline-flex items-center gap-4 px-12 py-5 bg-[#7B3F32] text-white rounded-full text-sm font-medium uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+                        <span class="text-2xl">@</span>
+                        EULUCIANAAROCHA
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQ -->
+        <section id="faq" class="section-padding bg-cream scroll-mt-20">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-20 reveal">
+                    <span class="text-gold font-bold uppercase tracking-[0.4em] text-xs mb-4 block">Central de
+                        Ajuda Maternal</span>
+                    <h2 class="text-5xl font-serif italic text-wine">Dúvidas Frequentes</h2>
+                    <div class="h-px w-20 bg-wine/20 mx-auto mt-8"></div>
+                </div>
+                <div class="space-y-4 reveal">
+                    <details
+                        class="group bg-taupe/20 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:bg-taupe/30">
+                        <summary class="flex justify-between items-center font-bold text-wine text-2xl list-none">
+                            O que é o Pré-natal Psicológico?
+                            <span
+                                class="material-symbols-outlined group-open:rotate-45 transition-transform text-gold">add</span>
+                        </summary>
+                        <div class="mt-8 text-chocolate/70 leading-relaxed text-lg border-t border-wine/10 pt-8">
+                            É um acompanhamento preventivo que prepara o emocional da mulher (e da família) para as
+                            mudanças da gestação, parto e pós-parto, prevenindo transtornos como a depressão pós-parto e
+                            fortalecendo o vínculo com o bebê.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-taupe/20 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:bg-taupe/30">
+                        <summary class="flex justify-between items-center font-bold text-wine text-2xl list-none">
+                            Vocês atendem intercorrências no Puerpério?
+                            <span
+                                class="material-symbols-outlined group-open:rotate-45 transition-transform text-gold">add</span>
+                        </summary>
+                        <div class="mt-8 text-chocolate/70 leading-relaxed text-lg border-t border-wine/10 pt-8">
+                            Sim. O pós-parto é uma fase crítica de vulnerabilidade. Ofereço suporte especializado para
+                            lidar com o Baby Blues, depressão pós-parto, ansiedade e os desafios da amamentação e
+                            cuidados iniciais.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-taupe/20 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:bg-taupe/30">
+                        <summary class="flex justify-between items-center font-bold text-wine text-2xl list-none">
+                            Como funciona a Orientação Parental?
+                            <span
+                                class="material-symbols-outlined group-open:rotate-45 transition-transform text-gold">add</span>
+                        </summary>
+                        <div class="mt-8 text-chocolate/70 leading-relaxed text-lg border-t border-wine/10 pt-8">
+                            Diferente da psicoterapia individual, a orientação parental foca em desafios específicos da
+                            criação dos filhos e na dinâmica da família, ajudando os pais a encontrar caminhos mais
+                            conscientes e leves na educação.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-taupe/20 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:bg-taupe/30">
+                        <summary class="flex justify-between items-center font-bold text-wine text-2xl list-none">
+                            O atendimento online tem a mesma eficácia?
+                            <span
+                                class="material-symbols-outlined group-open:rotate-45 transition-transform text-gold">add</span>
+                        </summary>
+                        <div class="mt-8 text-chocolate/70 leading-relaxed text-lg border-t border-wine/10 pt-8">
+                            Sim. Para muitas mães e gestantes, o atendimento online é inclusive preferível pela
+                            facilidade logística. Seguimos rigorosamente o código de ética do CFP, garantindo total
+                            sigilo e qualidade técnica.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-wine text-cream pt-32 pb-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-24 mb-24">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-4">
+                        <span class="material-symbols-outlined text-gold text-4xl">eco</span>
+                        <span class="text-3xl font-serif font-bold italic tracking-tight">Luciana</span>
+                    </div>
+                    <p class="text-cream/70 font-serif italic text-xl leading-relaxed">"Onde o acolhimento técnico se
+                        transforma em caminho para o bem-estar materno."</p>
+                </div>
+                <div class="space-y-8">
+                    <h4 class="text-gold font-bold uppercase tracking-[0.4em] text-xs">Menu Materno</h4>
+                    <ul class="font-serif italic text-cream/60 space-y-4 text-lg">
+                        <li><a href="#tratamentos" class="hover:text-gold transition-colors">Serviços</a></li>
+                        <li><a href="#abordagem" class="hover:text-gold transition-colors">Abordagem Perinatal</a></li>
+                        <li><a href="#sobre" class="hover:text-gold transition-colors">Sobre Mim</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-8">
+                    <h4 class="text-gold font-bold uppercase tracking-[0.4em] text-xs">Conexão</h4>
+                    <ul class="font-serif italic text-cream/60 space-y-4 text-lg">
+                        <li class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-gold">call</span> (61) 98427-6647</li>
+                        <li class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-gold">mail</span> psilu.lar@gmail.com
+                        </li>
+                        <li class="flex items-center gap-3 underline decoration-gold/30"><a href="#"
+                                class="hover:text-gold transition-colors">@eulucianaarocha</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-bold uppercase tracking-widest text-cream/30">
+                <p>© 2026 Luciana Rocha. Todos os Direitos Reservados.</p>
+                <div class="flex gap-12">
+                    <a href="politica-de-privacidade.html" class="hover:text-cream transition-colors">Privacidade</a>
+                    <a href="termos-de-uso.html" class="hover:text-cream transition-colors">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5561984276647" target="_blank"
+        class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.893 9.884m8.415-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+    </a>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = reveals[i].classList.contains('video-animate-entry') ? windowHeight * 0.2 : 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        const carousel = document.querySelector('.carousel-container');
+        const originalCards = Array.from(document.querySelectorAll('.carousel-card'));
+        const dotsContainer = document.querySelector('#trabalho .flex.justify-center.gap-2');
+
+        const clonesStart = originalCards.slice(-2).map(card => card.cloneNode(true));
+        const clonesEnd = originalCards.slice(0, 2).map(card => card.cloneNode(true));
+        clonesStart.reverse().forEach(clone => carousel.insertBefore(clone, carousel.firstChild));
+        clonesEnd.forEach(clone => carousel.appendChild(clone));
+
+        const allCards = Array.from(document.querySelectorAll('.carousel-card'));
+        const numOriginals = originalCards.length;
+
+        dotsContainer.innerHTML = '';
+        originalCards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `h-1 rounded-full transition-all duration-500 ${i === 0 ? 'w-8 bg-gold' : 'w-4 bg-gold/20'}`;
+            dotsContainer.appendChild(dot);
+        });
+        const dots = dotsContainer.querySelectorAll('div');
+
+        function updateCarousel() {
+            const containerCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
+            let activeIndex = 0;
+            let minDistance = Infinity;
+
+            allCards.forEach((card, i) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(containerCenter - cardCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    activeIndex = i;
+                }
+            });
+
+            allCards.forEach((card, i) => {
+                card.classList.toggle('active', i === activeIndex);
+                if (i === activeIndex) {
+                    card.style.zIndex = "20";
+                } else {
+                    card.style.zIndex = "10";
+                }
+            });
+
+            let dotIndex = (activeIndex - 2) % numOriginals;
+            if (dotIndex < 0) dotIndex += numOriginals;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('w-8', i === dotIndex);
+                dot.classList.toggle('bg-gold', i === dotIndex);
+                dot.classList.toggle('w-4', i !== dotIndex);
+                dot.classList.toggle('bg-gold/20', i !== dotIndex);
+            });
+        }
+
+        let isJumping = false;
+        function handleInfiniteScroll() {
+            if (isJumping) return;
+            const scrollLeft = carousel.scrollLeft;
+            const cardWidth = allCards[0].offsetWidth;
+
+            if (scrollLeft < cardWidth) {
+                isJumping = true;
+                carousel.scrollLeft = scrollLeft + (numOriginals * cardWidth);
+                setTimeout(() => isJumping = false, 50);
+            } else if (scrollLeft > carousel.scrollWidth - carousel.offsetWidth - cardWidth) {
+                isJumping = true;
+                carousel.scrollLeft = scrollLeft - (numOriginals * cardWidth);
+                setTimeout(() => isJumping = false, 50);
+            }
+        }
+
+        let autoScrollInterval;
+        let currentIdx = 2;
+
+        function startAutoScroll() {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = setInterval(() => {
+                currentIdx++;
+
+                // Salto infinito antecipado
+                if (currentIdx >= allCards.length - 1) {
+                    carousel.style.scrollBehavior = 'auto';
+                    currentIdx = 1;
+                    carousel.scrollLeft = allCards[currentIdx].offsetLeft - (carousel.offsetWidth / 2) + (allCards[currentIdx].offsetWidth / 2);
+                    carousel.style.scrollBehavior = 'smooth';
+                    currentIdx = 2;
+                }
+
+                const targetCard = allCards[currentIdx];
+                carousel.scrollTo({
+                    left: targetCard.offsetLeft - (carousel.offsetWidth / 2) + (targetCard.offsetWidth / 2),
+                    behavior: 'smooth'
+                });
+            }, 2500);
+        }
+
+        carousel.addEventListener('scroll', () => {
+            updateCarousel();
+            handleInfiniteScroll();
+            const containerCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
+            allCards.forEach((card, i) => {
+                if (Math.abs(containerCenter - (card.offsetLeft + card.offsetWidth / 2)) < 50) currentIdx = i;
+            });
+        });
+
+        carousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+        carousel.addEventListener('mouseleave', startAutoScroll);
+
+        window.addEventListener('load', () => {
+            carousel.scrollLeft = allCards[2].offsetLeft - (carousel.offsetWidth / 2) + (allCards[2].offsetWidth / 2);
+            updateCarousel();
+            startAutoScroll();
+        });
+
+        window.addEventListener("scroll", reveal);
+
+        // --- Lógica Carrossel Depoimentos ---
+        const depoContainer = document.querySelector('.depoimentos-container');
+        const originalDepoCards = Array.from(depoContainer.querySelectorAll('.depoimento-card'));
+        const depoDotsContainer = document.querySelector('.depoimentos-dots');
+        const numOriginalDepos = originalDepoCards.length;
+
+        // Clone para loop infinito (2 cards visíveis = precisamos de mais clones)
+        const depoClonesStart = originalDepoCards.slice(-2).map(card => card.cloneNode(true));
+        const depoClonesEnd = originalDepoCards.slice(0, 2).map(card => card.cloneNode(true));
+
+        depoClonesStart.reverse().forEach(clone => depoContainer.insertBefore(clone, depoContainer.firstChild));
+        depoClonesEnd.forEach(clone => depoContainer.appendChild(clone));
+
+        const allDepoCards = Array.from(depoContainer.querySelectorAll('.depoimento-card'));
+
+        // Dots
+        depoDotsContainer.innerHTML = '';
+        originalDepoCards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `h-1 rounded-full transition-all duration-500 cursor-pointer ${i === 0 ? 'w-8 bg-gold' : 'w-4 bg-gold/20'}`;
+            depoDotsContainer.appendChild(dot);
+        });
+        const depoDots = depoDotsContainer.querySelectorAll('div');
+
+        function updateDepoDots() {
+            const containerCenter = depoContainer.scrollLeft + depoContainer.offsetWidth / 2;
+            let activeIndex = 0;
+            let minDistance = Infinity;
+
+            allDepoCards.forEach((card, i) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(containerCenter - cardCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    activeIndex = i;
+                }
+            });
+
+            // Mapeamento do activeIndex para o dot (considerando os 2 clones no início)
+            let dotIndex = (activeIndex - 2) % numOriginalDepos;
+            if (dotIndex < 0) dotIndex += numOriginalDepos;
+
+            depoDots.forEach((dot, i) => {
+                dot.classList.toggle('w-8', i === dotIndex);
+                dot.classList.toggle('bg-gold', i === dotIndex);
+                dot.classList.toggle('w-4', i !== dotIndex);
+                dot.classList.toggle('bg-gold/20', i !== dotIndex);
+            });
+        }
+
+        let isDepoJumping = false;
+        function handleDepoInfiniteScroll() {
+            if (isDepoJumping) return;
+            const scrollLeft = depoContainer.scrollLeft;
+            const cardWidth = allDepoCards[0].offsetWidth + 32; // card + gap
+
+            if (scrollLeft < cardWidth) {
+                isDepoJumping = true;
+                depoContainer.scrollLeft = scrollLeft + (numOriginalDepos * cardWidth);
+                setTimeout(() => isDepoJumping = false, 50);
+            } else if (scrollLeft > depoContainer.scrollWidth - depoContainer.offsetWidth - cardWidth) {
+                isDepoJumping = true;
+                depoContainer.scrollLeft = scrollLeft - (numOriginalDepos * cardWidth);
+                setTimeout(() => isDepoJumping = false, 50);
+            }
+        }
+
+        depoContainer.addEventListener('scroll', () => {
+            updateDepoDots();
+            handleDepoInfiniteScroll();
+        });
+
+        // Inicializar posição no primeiro card original
+        window.addEventListener('load', () => {
+            const firstOriginal = allDepoCards[2];
+            depoContainer.scrollLeft = firstOriginal.offsetLeft;
+            updateDepoDots();
+        });
+    </script>
+</body>
+
+</html>
