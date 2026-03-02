@@ -137,6 +137,7 @@
             scrollbar-width: none;
             padding-bottom: 3rem;
             position: relative;
+            scroll-snap-type: x mandatory;
         }
 
         .carousel-container::before,
@@ -153,6 +154,7 @@
             flex: 0 0 72%;
             margin-right: 0;
             scroll-snap-align: center;
+            scroll-snap-stop: always;
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             transform: scale(0.8);
             opacity: 0.2;
@@ -175,6 +177,7 @@
             gap: 2rem;
             padding: 2rem 0;
             position: relative;
+            scroll-snap-type: x mandatory;
         }
 
         .depoimento-card {
@@ -188,6 +191,8 @@
             flex-direction: column;
             justify-content: space-between;
             min-height: 400px;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
         }
 
         @media (min-width: 1024px) {
