@@ -792,233 +792,91 @@
     <footer class="bg-wine text-cream pt-12 pb-16">
         <div class="max-w-7xl mx-auto px-6">
             <div
-                class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-bold uppercase tracking-widest text-cream/30">
-                <p>© 2026 Luciana Rocha. Todos os Direitos Reservados.</p>
-                <div class="flex gap-12">
-                    <a href="politica-de-privacidade.html" class="hover:text-cream transition-colors">Privacidade</a>
-                    <a href="termos-de-uso.html" class="hover:text-cream transition-colors">Termos de Uso</a>
+                class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+                <p class="text-sm text-cream/70">
+                    © 2026 Luciana Rocha. Todos os direitos reservados.
+                </p>
+
+                <div class="flex items-center gap-6">
+                    <a href="https://www.instagram.com/eulucianaarocha" target="_blank"
+                        class="text-cream/70 hover:text-gold transition-colors text-sm uppercase tracking-widest">
+                        Instagram
+                    </a>
+                    <a href="https://wa.me/5561984276647?text=Ol%C3%A1!%20Conheci%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar."
+                        target="_blank"
+                        class="text-cream/70 hover:text-gold transition-colors text-sm uppercase tracking-widest">
+                        WhatsApp
+                    </a>
                 </div>
+
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5561984276647?text=Ol%C3%A1!%20Conheci%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar."
-        target="_blank"
-        class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.893 9.884m8.415-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-        </svg>
-    </a>
+    depoClonesStart.reverse().forEach(clone => depoContainer.insertBefore(clone, depoContainer.firstChild));
+    depoClonesEnd.forEach(clone => depoContainer.appendChild(clone));
 
-    <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = reveals[i].classList.contains('video-animate-entry') ? windowHeight * 0.2 : 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
+    const allDepoCards = Array.from(depoContainer.querySelectorAll('.depoimento-card'));
 
-        const carousel = document.querySelector('.carousel-container');
-        const originalCards = Array.from(document.querySelectorAll('.carousel-card'));
-        const dotsContainer = document.querySelector('#trabalho .flex.justify-center.gap-2');
+    // Dots
+    depoDotsContainer.innerHTML = '';
+    originalDepoCards.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = `h-1 rounded-full transition-all duration-500 cursor-pointer ${i === 0 ? 'w-8 bg-gold' : 'w-4
+    bg-gold/20'}`;
+    depoDotsContainer.appendChild(dot);
+    });
+    const depoDots = depoDotsContainer.querySelectorAll('div');
 
-        const clonesStart = originalCards.slice(-2).map(card => card.cloneNode(true));
-        const clonesEnd = originalCards.slice(0, 2).map(card => card.cloneNode(true));
-        clonesStart.reverse().forEach(clone => carousel.insertBefore(clone, carousel.firstChild));
-        clonesEnd.forEach(clone => carousel.appendChild(clone));
+    function updateDepoDots() {
+    const containerCenter = depoContainer.scrollLeft + depoContainer.offsetWidth / 2;
+    let activeIndex = 0;
+    let minDistance = Infinity;
 
-        const allCards = Array.from(document.querySelectorAll('.carousel-card'));
-        const numOriginals = originalCards.length;
-
-        dotsContainer.innerHTML = '';
-        originalCards.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = `h-1 rounded-full transition-all duration-500 ${i === 0 ? 'w-8 bg-gold' : 'w-4 bg-gold/20'}`;
-            dotsContainer.appendChild(dot);
+    allDepoCards.forEach((card, i) => {
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    const distance = Math.abs(containerCenter - cardCenter);
+    if (distance < minDistance) { minDistance=distance; activeIndex=i; } }); // Mapeamento do activeIndex para o dot
+        (considerando os 2 clones no início) let dotIndex=(activeIndex - 2) % numOriginalDepos; if (dotIndex < 0)
+        dotIndex +=numOriginalDepos; depoDots.forEach((dot, i)=> {
+        dot.classList.toggle('w-8', i === dotIndex);
+        dot.classList.toggle('bg-gold', i === dotIndex);
+        dot.classList.toggle('w-4', i !== dotIndex);
+        dot.classList.toggle('bg-gold/20', i !== dotIndex);
         });
-        const dots = dotsContainer.querySelectorAll('div');
-
-        function updateCarousel() {
-            const containerCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
-            let activeIndex = 0;
-            let minDistance = Infinity;
-
-            allCards.forEach((card, i) => {
-                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                const distance = Math.abs(containerCenter - cardCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    activeIndex = i;
-                }
-            });
-
-            allCards.forEach((card, i) => {
-                card.classList.toggle('active', i === activeIndex);
-                if (i === activeIndex) {
-                    card.style.zIndex = "20";
-                } else {
-                    card.style.zIndex = "10";
-                }
-            });
-
-            let dotIndex = (activeIndex - 2) % numOriginals;
-            if (dotIndex < 0) dotIndex += numOriginals;
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('w-8', i === dotIndex);
-                dot.classList.toggle('bg-gold', i === dotIndex);
-                dot.classList.toggle('w-4', i !== dotIndex);
-                dot.classList.toggle('bg-gold/20', i !== dotIndex);
-            });
-        }
-
-        let isJumping = false;
-        function handleInfiniteScroll() {
-            if (isJumping) return;
-            const scrollLeft = carousel.scrollLeft;
-            const cardWidth = allCards[0].offsetWidth;
-
-            if (scrollLeft < cardWidth) {
-                isJumping = true;
-                carousel.scrollLeft = scrollLeft + (numOriginals * cardWidth);
-                setTimeout(() => isJumping = false, 50);
-            } else if (scrollLeft > carousel.scrollWidth - carousel.offsetWidth - cardWidth) {
-                isJumping = true;
-                carousel.scrollLeft = scrollLeft - (numOriginals * cardWidth);
-                setTimeout(() => isJumping = false, 50);
-            }
-        }
-
-        let autoScrollInterval;
-        let currentIdx = 2;
-
-        function startAutoScroll() {
-            clearInterval(autoScrollInterval);
-            autoScrollInterval = setInterval(() => {
-                currentIdx++;
-
-                // Salto infinito antecipado
-                if (currentIdx >= allCards.length - 1) {
-                    carousel.style.scrollBehavior = 'auto';
-                    currentIdx = 1;
-                    carousel.scrollLeft = allCards[currentIdx].offsetLeft - (carousel.offsetWidth / 2) + (allCards[currentIdx].offsetWidth / 2);
-                    carousel.style.scrollBehavior = 'smooth';
-                    currentIdx = 2;
-                }
-
-                const targetCard = allCards[currentIdx];
-                carousel.scrollTo({
-                    left: targetCard.offsetLeft - (carousel.offsetWidth / 2) + (targetCard.offsetWidth / 2),
-                    behavior: 'smooth'
-                });
-            }, 2500);
-        }
-
-        carousel.addEventListener('scroll', () => {
-            updateCarousel();
-            handleInfiniteScroll();
-            const containerCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
-            allCards.forEach((card, i) => {
-                if (Math.abs(containerCenter - (card.offsetLeft + card.offsetWidth / 2)) < 50) currentIdx = i;
-            });
-        });
-
-        carousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-        carousel.addEventListener('mouseleave', startAutoScroll);
-
-        window.addEventListener('load', () => {
-            carousel.scrollLeft = allCards[2].offsetLeft - (carousel.offsetWidth / 2) + (allCards[2].offsetWidth / 2);
-            updateCarousel();
-            startAutoScroll();
-        });
-
-        window.addEventListener("scroll", reveal);
-
-        // --- Lógica Carrossel Depoimentos ---
-        const depoContainer = document.querySelector('.depoimentos-container');
-        const originalDepoCards = Array.from(depoContainer.querySelectorAll('.depoimento-card'));
-        const depoDotsContainer = document.querySelector('.depoimentos-dots');
-        const numOriginalDepos = originalDepoCards.length;
-
-        // Clone para loop infinito (2 cards visíveis = precisamos de mais clones)
-        const depoClonesStart = originalDepoCards.slice(-2).map(card => card.cloneNode(true));
-        const depoClonesEnd = originalDepoCards.slice(0, 2).map(card => card.cloneNode(true));
-
-        depoClonesStart.reverse().forEach(clone => depoContainer.insertBefore(clone, depoContainer.firstChild));
-        depoClonesEnd.forEach(clone => depoContainer.appendChild(clone));
-
-        const allDepoCards = Array.from(depoContainer.querySelectorAll('.depoimento-card'));
-
-        // Dots
-        depoDotsContainer.innerHTML = '';
-        originalDepoCards.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = `h-1 rounded-full transition-all duration-500 cursor-pointer ${i === 0 ? 'w-8 bg-gold' : 'w-4 bg-gold/20'}`;
-            depoDotsContainer.appendChild(dot);
-        });
-        const depoDots = depoDotsContainer.querySelectorAll('div');
-
-        function updateDepoDots() {
-            const containerCenter = depoContainer.scrollLeft + depoContainer.offsetWidth / 2;
-            let activeIndex = 0;
-            let minDistance = Infinity;
-
-            allDepoCards.forEach((card, i) => {
-                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                const distance = Math.abs(containerCenter - cardCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    activeIndex = i;
-                }
-            });
-
-            // Mapeamento do activeIndex para o dot (considerando os 2 clones no início)
-            let dotIndex = (activeIndex - 2) % numOriginalDepos;
-            if (dotIndex < 0) dotIndex += numOriginalDepos;
-
-            depoDots.forEach((dot, i) => {
-                dot.classList.toggle('w-8', i === dotIndex);
-                dot.classList.toggle('bg-gold', i === dotIndex);
-                dot.classList.toggle('w-4', i !== dotIndex);
-                dot.classList.toggle('bg-gold/20', i !== dotIndex);
-            });
         }
 
         let isDepoJumping = false;
         function handleDepoInfiniteScroll() {
-            if (isDepoJumping) return;
-            const scrollLeft = depoContainer.scrollLeft;
-            const cardWidth = allDepoCards[0].offsetWidth + 32; // card + gap
+        if (isDepoJumping) return;
+        const scrollLeft = depoContainer.scrollLeft;
+        const cardWidth = allDepoCards[0].offsetWidth + 32; // card + gap
 
-            if (scrollLeft < cardWidth) {
-                isDepoJumping = true;
-                depoContainer.scrollLeft = scrollLeft + (numOriginalDepos * cardWidth);
-                setTimeout(() => isDepoJumping = false, 50);
+        if (scrollLeft < cardWidth) { isDepoJumping=true; depoContainer.scrollLeft=scrollLeft + (numOriginalDepos *
+            cardWidth); setTimeout(()=> isDepoJumping = false, 50);
             } else if (scrollLeft > depoContainer.scrollWidth - depoContainer.offsetWidth - cardWidth) {
-                isDepoJumping = true;
-                depoContainer.scrollLeft = scrollLeft - (numOriginalDepos * cardWidth);
-                setTimeout(() => isDepoJumping = false, 50);
+            isDepoJumping = true;
+            depoContainer.scrollLeft = scrollLeft - (numOriginalDepos * cardWidth);
+            setTimeout(() => isDepoJumping = false, 50);
             }
-        }
+            }
 
-        depoContainer.addEventListener('scroll', () => {
+            depoContainer.addEventListener('scroll', () => {
             updateDepoDots();
             handleDepoInfiniteScroll();
-        });
+            });
 
-        // Inicializar posição no primeiro card original
-        window.addEventListener('load', () => {
-            const firstOriginal = allDepoCards[2];
-            depoContainer.scrollLeft = firstOriginal.offsetLeft;
+            // Inicializar posição no primeiro card original
+            window.addEventListener('load', () => {
+            });
+
+            window.addEventListener('load', () => {
+            depoContainer.scrollLeft = allDepoCards[2].offsetLeft - (depoContainer.offsetWidth / 2) +
+            (allDepoCards[2].offsetWidth / 2);
             updateDepoDots();
-        });
-    </script>
+            });
+            </script>
 </body>
 
 </html>
